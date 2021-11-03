@@ -1,18 +1,17 @@
-package coderank.impl.pagerank;
+package coderank.impl.katzcentrality;
 
 import coderank.impl.analyzer.AnalyzerNode;
+import coderank.impl.pagerank.PageNode;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class PageNode implements AnalyzerNode {
-
+public class KatzNode implements AnalyzerNode {
     public int index;
-    private double rank = 1;
-    public List<PageNode> parents = new LinkedList<>();
-    public List<PageNode> neighbours = new LinkedList<>();
+    private double rank = 0;
+    public List<KatzNode> neighbours = new LinkedList<>();
 
-    public PageNode(int index) {
+    public KatzNode(int index) {
         this.index = index;
     }
 
