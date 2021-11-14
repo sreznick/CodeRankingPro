@@ -6,6 +6,7 @@ import coderank.impl.javagraph.Node;
 import coderank.impl.pagerank.PageRankLauncher;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 
 public class ResultsHandler {
@@ -52,7 +53,15 @@ public class ResultsHandler {
             graph.getGraphStorage().add(parent);
         }
         graph.constructGraph();
-        PageRankLauncher launcher = new PageRankLauncher<>();
-        launcher.launch(graph.getGraphStorage(), graph.getGraphEdges(), graph.getGraphParents(), "dynamic");
+        PageRankLauncher<MethodNode> launcher = new PageRankLauncher<>();
+        Exception e = new Exception();
+        try {
+        launcher.launch(graph.getGraphStorage(), graph.getGraphEdges(), graph.getGraphParents(), "dynamic",
+                new OutputStreamWriter(new FileOutputStream("DynamicCodeRankingStat.txt"),
+                        StandardCharsets.UTF_8));
+        } catch (Exception ex) {
+            e.addSuppressed(ex);
+            e.printStackTrace();
+        }
     }
 }

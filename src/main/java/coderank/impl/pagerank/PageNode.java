@@ -25,4 +25,9 @@ public class PageNode implements AnalyzerNode {
     public void setRank(double rank) {
         this.rank = rank;
     }
+
+    @Override
+    public int getIndex() {
+        return index;
+    }
 }

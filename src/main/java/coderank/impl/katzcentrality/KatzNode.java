@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class KatzNode implements AnalyzerNode {
-    public int index;
+    private final int index;
     private double rank = 0;
     public List<KatzNode> neighbours = new LinkedList<>();
 
@@ -23,5 +23,10 @@ public class KatzNode implements AnalyzerNode {
     @Override
     public void setRank(double rank) {
         this.rank = rank;
+    }
+
+    @Override
+    public int getIndex() {
+        return index;
     }
 }

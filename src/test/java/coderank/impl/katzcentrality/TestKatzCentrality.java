@@ -1,9 +1,16 @@
-package coderank.impl.pagerank;
+package coderank.impl.katzcentrality;
 
+import coderank.impl.analyzer.AnalyzerNode;
+import coderank.impl.javagraph.MethodNode;
+import coderank.impl.javagraph.Node;
 import coderank.impl.katzcentrality.KatzCentralityCalculator;
+import coderank.impl.katzcentrality.KatzCentralityLauncher;
 import coderank.impl.katzcentrality.KatzNode;
 import org.testng.annotations.Test;
 
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 import static org.gradle.internal.impldep.org.junit.Assert.assertEquals;
@@ -57,9 +64,9 @@ public class TestKatzCentrality {
         testGraph.launchAnalysis(50);
         List<Integer> expected = Arrays.asList(3, 1, 2, 0, 4);
         List<Integer> actual = new ArrayList<>();
-        testGraph.nodes.stream()
-                .sorted(Comparator.comparingDouble(KatzNode::getRank).reversed())
-                .forEach(x -> actual.add(x.index));
+        testGraph.getNodes().stream()
+                .sorted(Comparator.comparingDouble(AnalyzerNode::getRank).reversed())
+                .forEach(x -> actual.add(x.getIndex()));
         assertEquals(expected, actual);
     }
 
@@ -71,7 +78,7 @@ public class TestKatzCentrality {
         testGraph.launchAnalysis(50);
         double eps = 1e-9;
         double expected = 1;
-        for (KatzNode node : testGraph.nodes) {
+        for (AnalyzerNode node : testGraph.getNodes()) {
             assertTrue(Math.abs(node.getRank() - expected) < eps);
         }
     }
@@ -91,9 +98,29 @@ public class TestKatzCentrality {
         testGraph.launchAnalysis(100);
         List<Integer> expected = Arrays.asList(0, 4, 2, 1, 3, 6, 5);
         List<Integer> actual = new ArrayList<>();
-        testGraph.nodes.stream()
-                .sorted(Comparator.comparingDouble(KatzNode::getRank).reversed())
-                .forEach(x -> actual.add(x.index));
+        testGraph.getNodes().stream()
+                .sorted(Comparator.comparingDouble(AnalyzerNode::getRank).reversed())
+                .forEach(x -> actual.add(x.getIndex()));
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testLaunch() {
+        Node<MethodNode> node1 = MethodNode.createNode();
+        node1.payload = new MethodNode("A.class", "desc");
+        Node<MethodNode> node2 = MethodNode.createNode();
+        node2.payload = new MethodNode("B.class", "desc");
+        HashSet<Node<MethodNode>> initStorage = new HashSet<>();
+        initStorage.add(node1);
+        initStorage.add(node2);
+
+        HashMap<Node<MethodNode>, List<Node<MethodNode>>> edges = new HashMap<>();
+        edges.put(node1, Collections.singletonList(node2));
+
+        HashMap<Node<MethodNode>, List<Node<MethodNode>>> parents = new HashMap<>();
+        parents.put(node2, Collections.singletonList(node1));
+
+        KatzCentralityLauncher<MethodNode> launcher = new KatzCentralityLauncher<>();
+        launcher.launch(initStorage, edges, parents, "static_classes", new OutputStreamWriter(System.out));
     }
 }

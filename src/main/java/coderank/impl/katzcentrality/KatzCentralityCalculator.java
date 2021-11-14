@@ -13,9 +13,9 @@ import java.util.List;
 
 public class KatzCentralityCalculator<T> implements Analyzer<T> {
     private final SimpleMatrix A;
-    public HashSet<KatzNode> nodes = new HashSet<>();
+    private HashSet<KatzNode> nodes = new HashSet<>();
     private final HashMap<KatzNode, Node<T>> revStorage = new HashMap<>();
-    int nodesSize;
+    private final int nodesSize;
 
 
     public KatzCentralityCalculator(HashSet<KatzNode> nodes) {
@@ -23,7 +23,7 @@ public class KatzCentralityCalculator<T> implements Analyzer<T> {
         this.A = new SimpleMatrix(nodesSize, nodesSize);
         for (KatzNode i : nodes) {
             for (KatzNode j : i.neighbours) {
-                this.A.set(i.index, j.index, 1);
+                this.A.set(i.getIndex(), j.getIndex(), 1);
             }
         }
         this.nodes = nodes;
@@ -51,7 +51,7 @@ public class KatzCentralityCalculator<T> implements Analyzer<T> {
         this.A = new SimpleMatrix(nodesSize, nodesSize);
         for (KatzNode i : nodes) {
             for (KatzNode j : i.neighbours) {
-                this.A.set(i.index, j.index, 1);
+                this.A.set(i.getIndex(), j.getIndex(), 1);
             }
         }
     }
@@ -64,7 +64,6 @@ public class KatzCentralityCalculator<T> implements Analyzer<T> {
         double alpha;
         if (maxMagnitude > 0) {
             alpha = Math.min(0.5, 0.5 / maxMagnitude) ;
-            System.out.println(alpha);
             SimpleMatrix I = new SimpleMatrix(nodesSize, 1);
             for (int i = 0; i < nodesSize; i++) {
                 I.set(i, 0, 1.0);
@@ -72,10 +71,9 @@ public class KatzCentralityCalculator<T> implements Analyzer<T> {
             SimpleMatrix katzVec = SimpleMatrix.identity(nodesSize).minus(A.transpose().scale(alpha)).invert()
                     .minus(SimpleMatrix.identity(nodesSize)).mult(I);
             for (KatzNode i : nodes) {
-                i.setRank(katzVec.get(i.index, 0));
+                i.setRank(katzVec.get(i.getIndex(), 0));
             }
         } else {
-            System.out.println("dede");
             alpha = 0.5;
             for (KatzNode i : nodes) {
                 SimpleMatrix A_k = A;
@@ -83,7 +81,7 @@ public class KatzCentralityCalculator<T> implements Analyzer<T> {
                 double res = 0;
                 for (int k = 1; k <= iterations; k++) {
                     for (KatzNode j : nodes) {
-                        res += java.lang.Math.pow(alpha, k) * A_k.get(j.index, i.index);
+                        res += java.lang.Math.pow(alpha, k) * A_k.get(j.getIndex(), i.getIndex());
                     }
 
                     A_k = A_k.mult(A);

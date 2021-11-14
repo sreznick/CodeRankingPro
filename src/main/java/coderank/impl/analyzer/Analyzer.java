@@ -6,35 +6,35 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public interface Analyzer<T> {
     void launchAnalysis(int iterations);
     HashSet<? extends AnalyzerNode> getNodes();
     HashMap<? extends AnalyzerNode, Node<T>> getRevStorage();
 
-    default void getDistinctStats() {
-        Map<Double, ? extends List<? extends AnalyzerNode>> distinctPageNodes =
-                getNodes().stream()
+    default Map<Double, ? extends List<? extends AnalyzerNode>> getDistinctStats() {
+        return getNodes().stream()
                         .sorted(Comparator.comparingDouble(AnalyzerNode::getRank).reversed())
                         .collect(Collectors.groupingBy(AnalyzerNode::getRank));
+    }
 
+    default void writeDistinctStats(Map<Double, ? extends List<? extends AnalyzerNode>> distinctStats,
+                                    OutputStreamWriter outputStream) {
         List<Double> values =
-                getNodes().stream()
-                        .sorted(Comparator.comparingDouble(AnalyzerNode::getRank).reversed())
-                        .map(AnalyzerNode::getRank)
-                        .distinct()
+                distinctStats.keySet().stream()
+                        .sorted(Comparator.reverseOrder())
                         .collect(Collectors.toList());
 
         Exception e = new Exception();
-        try (Writer fileWriter = new BufferedWriter(new OutputStreamWriter(
-                new FileOutputStream("DynamicCodeRankingStat.txt"), StandardCharsets.UTF_8))) {
+        try (Writer fileWriter = new BufferedWriter(outputStream)) {
             for (Double rank : values) {
                 String stringRank = rank.toString();
                 if (stringRank.length() >= 7) {
                     stringRank = (String) stringRank.subSequence(0, 7);
                 }
                 fileWriter.write("Rank: " + stringRank + '\n');
-                for (AnalyzerNode node : distinctPageNodes.get(rank)) {
+                for (AnalyzerNode node : distinctStats.get(rank)) {
                     fileWriter.write(getRevStorage().get(node).getName());
                     fileWriter.write("\n");
                 }
@@ -51,12 +51,7 @@ public interface Analyzer<T> {
                 getNodes().stream()
                         .collect(Collectors.groupingBy(x -> {
                             String name = getRevStorage().get(x).getName();
-                            int idx;
-                            for (idx = name.length() - 1; idx >= 0; idx--) {
-                                if (name.charAt(idx) == '.') {
-                                    break;
-                                }
-                            }
+                            int idx = name.lastIndexOf('.');
                             return name.subSequence(0, idx);
                         }));
 
