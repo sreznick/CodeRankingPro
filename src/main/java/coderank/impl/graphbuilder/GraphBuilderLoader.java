@@ -4,9 +4,12 @@ import coderank.impl.javagraph.Node;
 import coderank.impl.pagerank.PageRankLauncher;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -60,7 +63,9 @@ public class GraphBuilderLoader<T> {
             HashMap<Node<T>, List<Node<T>>> builderParents = (HashMap<Node<T>, List<Node<T>>>) getGraphParents.invoke(instance);
 
             PageRankLauncher<T> launcher = new PageRankLauncher<>();
-            launcher.launch(builderStorage, builderEdges, builderParents, "static_classes");
+            launcher.launch(builderStorage, builderEdges, builderParents, "static_classes",
+                    new OutputStreamWriter(new FileOutputStream("DynamicCodeRankingStat.txt"),
+                            StandardCharsets.UTF_8));
 
         } catch (Exception e) {
             throw new GraphBuilderException("Unable to apply methods.");
