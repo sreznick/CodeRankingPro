@@ -36,6 +36,7 @@ dependencies {
     implementation group: 'org.ow2.asm', name: 'asm-tree', version: '9.1'
     implementation group: 'org.ow2.asm', name: 'asm-util', version: '9.1'
     implementation group: 'org.ow2.asm', name: 'asm-commons', version: '9.1'
+    implementation group: 'org.ejml', name: 'ejml-all', version: '0.41'
 }
 
 compileKotlin {

@@ -47,11 +47,11 @@ public class TestPageRank {
     @Test
     public void testPageRankLinearOrder() {
         initializeLinearOrder();
-        testGraph.launchPageRank(50);
+        testGraph.launchAnalysis(50);
         List<Integer> expected = Arrays.asList(5, 4, 3, 2, 1, 0);
         List<Integer> actual = new ArrayList<>();
         testGraph.nodes.stream()
-                .sorted(Comparator.comparingDouble((PageNode x) -> x.pagerank).reversed())
+                .sorted(Comparator.comparingDouble(PageNode::getRank).reversed())
                 .forEach(x -> actual.add(x.index));
         assertEquals(expected, actual);
     }
@@ -89,11 +89,11 @@ public class TestPageRank {
     @Test
     public void testPageRankCycle() {
         initializeCycle();
-        testGraph.launchPageRank(50);
+        testGraph.launchAnalysis(50);
         double eps = 1e-5;
         double expected = 0.2;
         for (PageNode node : testGraph.nodes) {
-            assertTrue(Math.abs(node.pagerank - expected) < eps);
+            assertTrue(Math.abs(node.getRank() - expected) < eps);
         }
     }
 
@@ -107,6 +107,7 @@ public class TestPageRank {
         PageNode node5 = new PageNode(curIndex++);
         PageNode node6 = new PageNode(curIndex++);
         PageNode node7 = new PageNode(curIndex);
+
 
         node1.neighbours.add(node2);
         node1.neighbours.add(node3);
@@ -160,11 +161,11 @@ public class TestPageRank {
     @Test
     public void testPageRankBasicFirst() {
         initializeBasicFirst();
-        testGraph.launchPageRank(50);
+        testGraph.launchAnalysis(50);
         List<Integer> expected = Arrays.asList(0, 4, 1, 2, 3, 6, 5);
         List<Integer> actual = new ArrayList<>();
         testGraph.nodes.stream()
-                .sorted(Comparator.comparingDouble((PageNode x) -> x.pagerank).reversed())
+                .sorted(Comparator.comparingDouble(PageNode::getRank).reversed())
                 .forEach(x -> actual.add(x.index));
         assertEquals(expected, actual);
     }
@@ -204,11 +205,11 @@ public class TestPageRank {
     @Test
     public void testPageRankBasicSecond() {
         initializeBasicSecond();
-        testGraph.launchPageRank(50);
+        testGraph.launchAnalysis(50);
         List<Integer> expected = Arrays.asList(0, 1, 2, 3, 4);
         List<Integer> actual = new ArrayList<>();
         testGraph.nodes.stream()
-                .sorted(Comparator.comparingDouble((PageNode x) -> x.pagerank).reversed())
+                .sorted(Comparator.comparingDouble(PageNode::getRank).reversed())
                 .forEach(x -> actual.add(x.index));
         assertEquals(expected, actual);
     }
@@ -247,12 +248,12 @@ public class TestPageRank {
     @Test
     public void testPageRankBasicThird() {
         initializeBasicThird();
-        testGraph.launchPageRank(50);
+        testGraph.launchAnalysis(50);
         List<Integer> expectedFirst = Arrays.asList(1, 2, 0, 3);
         List<Integer> expectedSecond = Arrays.asList(1, 0, 2, 3);
         List<Integer> actual = new ArrayList<>();
         testGraph.nodes.stream()
-                .sorted(Comparator.comparingDouble((PageNode x) -> x.pagerank).reversed())
+                .sorted(Comparator.comparingDouble(PageNode::getRank).reversed())
                 .forEach(x -> actual.add(x.index));
         assertTrue(expectedFirst.equals(actual) || expectedSecond.equals(actual));
     }
