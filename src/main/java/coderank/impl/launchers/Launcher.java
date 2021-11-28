@@ -24,7 +24,7 @@ public class Launcher {
         Enumeration<JarEntry> entries = jarFile.entries();
 
         // to launch without plugin installation
-        // Configuration.setConfigProperty("/home/olesya/HSE_2020-1/newestCodeRank/CodeRanking/src/main/java/coderank/resources/analysis.properties");
+         Configuration.setConfigProperty(args[5]);
 
         new Configuration();
 

@@ -8,7 +8,7 @@ out/
 src/main/java/CodeRank/gradle*
 *.class
 *.jar
-gradle*
+gradle.properties
 src/main/java/CodeRank/app/build*
 src/main/java/CodeRank/settings.gradle
 .gitattributes
