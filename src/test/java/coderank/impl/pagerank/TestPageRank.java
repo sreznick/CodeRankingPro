@@ -258,4 +258,9 @@ public class TestPageRank {
         assertTrue(expectedFirst.equals(actual) || expectedSecond.equals(actual));
     }
 
+    public static void main(String[] args) {
+        System.out.println("Hello");
+    }
+
 }
+
