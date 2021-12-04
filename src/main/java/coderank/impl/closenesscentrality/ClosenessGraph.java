@@ -2,11 +2,7 @@ package coderank.impl.closenesscentrality;
 
 import coderank.impl.analyzer.Analyzer;
 import coderank.impl.javagraph.Node;
-import coderank.impl.closenesscentrality.ClosenessNode;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.stream.Collectors;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;

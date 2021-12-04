@@ -1,15 +1,12 @@
 package coderank.impl.pagerank;
 
 import coderank.impl.analyzer.AnalyzerLauncher;
-import coderank.impl.analyzer.AnalyzerNode;
-import coderank.impl.javagraph.MethodNode;
 import coderank.impl.javagraph.Node;
 
 import java.io.OutputStreamWriter;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 
 public class PageRankLauncher<T> implements AnalyzerLauncher<T> {
 

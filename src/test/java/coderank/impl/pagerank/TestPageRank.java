@@ -2,11 +2,13 @@ package coderank.impl.pagerank;
 
 import static org.gradle.internal.impldep.org.junit.Assert.assertEquals;
 import static org.gradle.internal.impldep.org.junit.Assert.assertTrue;
-//import static org.junit.Assert.*;
 
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.List;
 import org.testng.annotations.Test;
-
-import java.util.*;
 
 public class TestPageRank {
 
@@ -256,10 +258,6 @@ public class TestPageRank {
                 .sorted(Comparator.comparingDouble(PageNode::getRank).reversed())
                 .forEach(x -> actual.add(x.index));
         assertTrue(expectedFirst.equals(actual) || expectedSecond.equals(actual));
-    }
-
-    public static void main(String[] args) {
-        System.out.println("Hello");
     }
 
 }

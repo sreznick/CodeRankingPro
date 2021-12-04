@@ -1,46 +1,21 @@
 package coderank.impl.closenesscentrality;
 
 import coderank.impl.analyzer.AnalyzerNode;
-import coderank.impl.javagraph.MethodNode;
-import coderank.impl.javagraph.Node;
-import coderank.impl.closenesscentrality.ClosenessGraph;
-import coderank.impl.katzcentrality.KatzCentralityLauncher;
-import coderank.impl.closenesscentrality.ClosenessNode;
-import org.testng.annotations.Test;
-
-
-import java.io.OutputStreamWriter;
-import java.util.*;
+import coderank.impl.Edge;
 
 import static org.gradle.internal.impldep.org.junit.Assert.assertEquals;
 
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import org.testng.annotations.Test;
 
 public class TestClosenessCentrality {
     private ClosenessGraph<ClosenessNode> testGraph;
-
-    private static class Edge {
-        public int left;
-        public int right;
-
-        Edge(int left, int right) {
-            this.left = left;
-            this.right = right;
-        }
-
-        public int getLeft() {
-            return left;
-        }
-
-        public int getRight() {
-            return right;
-        }
-
-        public static Edge create(int left, int right) {
-            return new Edge(left, right);
-        }
-    }
-
-    ;
 
     private void initializeGraph(int n, List<Edge> edges) {
         HashMap<Integer, ClosenessNode> storage = new HashMap<>();

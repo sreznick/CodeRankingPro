@@ -5,10 +5,7 @@ import coderank.impl.analyzer.AnalyzerNode;
 import java.util.LinkedList;
 import java.util.List;
 
-public class PageNode implements AnalyzerNode {
-
-    public int index;
-    private double rank = 1;
+public class PageNode extends AnalyzerNode {
     public List<PageNode> parents = new LinkedList<>();
     public List<PageNode> neighbours = new LinkedList<>();
 
@@ -16,18 +13,4 @@ public class PageNode implements AnalyzerNode {
         this.index = index;
     }
 
-    @Override
-    public double getRank() {
-        return rank;
-    }
-
-    @Override
-    public void setRank(double rank) {
-        this.rank = rank;
-    }
-
-    @Override
-    public int getIndex() {
-        return index;
-    }
 }

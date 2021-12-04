@@ -1,8 +1,6 @@
 package coderank.impl.closenesscentrality;
 
 import coderank.impl.analyzer.AnalyzerLauncher;
-import coderank.impl.analyzer.AnalyzerNode;
-import coderank.impl.javagraph.MethodNode;
 import coderank.impl.javagraph.Node;
 
 import java.io.OutputStreamWriter;
