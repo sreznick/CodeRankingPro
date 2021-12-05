@@ -5,7 +5,6 @@ import coderank.impl.staticanalysis.Configuration;
 import coderank.impl.javagraph.Graph;
 import coderank.impl.javagraph.MethodNode;
 import coderank.impl.graphbuilder.GraphBuilderLoader;
-import one.util.streamex.StreamEx;
 import org.objectweb.asm.ClassReader;
 
 import java.io.BufferedInputStream;
