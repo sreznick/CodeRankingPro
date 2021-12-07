@@ -26,13 +26,12 @@ public interface Analyzer<T> {
                         .sorted(Comparator.reverseOrder())
                         .collect(Collectors.toList());
 
+
         Exception e = new Exception();
         try (Writer fileWriter = new BufferedWriter(outputStream)) {
             for (Double rank : values) {
-                String stringRank = rank.toString();
-                if (stringRank.length() >= 7) {
-                    stringRank = (String) stringRank.subSequence(0, 7);
-                }
+                String stringRank = String.format("%6.3e", rank);
+
                 fileWriter.write("Rank: " + stringRank + '\n');
                 for (AnalyzerNode node : distinctStats.get(rank)) {
                     fileWriter.write(getRevStorage().get(node).getName());

@@ -68,7 +68,7 @@ public class GraphBuilderLoader<T> {
                             StandardCharsets.UTF_8));
 
         } catch (Exception e) {
-            throw new GraphBuilderException("Unable to apply methods.");
+            throw new GraphBuilderException("Unable to apply methods: ", e);
         }
     }
 

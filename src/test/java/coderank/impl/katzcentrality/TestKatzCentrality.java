@@ -1,16 +1,12 @@
 package coderank.impl.katzcentrality;
 
 import coderank.impl.analyzer.AnalyzerNode;
+import coderank.impl.javagraph.Graph;
 import coderank.impl.javagraph.MethodNode;
 import coderank.impl.javagraph.Node;
-import coderank.impl.katzcentrality.KatzCentralityCalculator;
-import coderank.impl.katzcentrality.KatzCentralityLauncher;
-import coderank.impl.katzcentrality.KatzNode;
 import org.testng.annotations.Test;
 
-import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 import static org.gradle.internal.impldep.org.junit.Assert.assertEquals;
@@ -96,7 +92,7 @@ public class TestKatzCentrality {
                 Edge.create(6, 5), Edge.create(7, 5)));
 
         testGraph.launchAnalysis(100);
-        List<Integer> expected = Arrays.asList(0, 4, 2, 1, 3, 6, 5);
+        List<Integer> expected = Arrays.asList(0, 1, 2, 4, 3, 6, 5);
         List<Integer> actual = new ArrayList<>();
         testGraph.getNodes().stream()
                 .sorted(Comparator.comparingDouble(AnalyzerNode::getRank).reversed())
@@ -111,6 +107,8 @@ public class TestKatzCentrality {
         Node<MethodNode> node2 = MethodNode.createNode();
         node2.payload = new MethodNode("B.class", "desc");
         HashSet<Node<MethodNode>> initStorage = new HashSet<>();
+        node1.setUsed();
+        node2.setUsed();
         initStorage.add(node1);
         initStorage.add(node2);
 
@@ -122,5 +120,7 @@ public class TestKatzCentrality {
 
         KatzCentralityLauncher<MethodNode> launcher = new KatzCentralityLauncher<>();
         launcher.launch(initStorage, edges, parents, "static_classes", new OutputStreamWriter(System.out));
+        Graph<MethodNode> g = new Graph<>();
+
     }
 }
