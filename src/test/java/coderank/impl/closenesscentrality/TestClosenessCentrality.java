@@ -56,7 +56,7 @@ public class TestClosenessCentrality {
         assertEquals(expectedBfs, actualBfs);
 
         testGraph.launchAnalysis(0);
-        List<Integer> expectedRanks = Arrays.asList(3, 2, 1, 0);
+        List<Integer> expectedRanks = Arrays.asList(0, 1, 2, 3);
         List<Integer> actualRanks = new ArrayList<>();
         testGraph.getNodes().stream()
                 .sorted(Comparator.comparingDouble(AnalyzerNode::getRank).reversed())
@@ -78,7 +78,7 @@ public class TestClosenessCentrality {
         assertEquals(expectedBfs, actualBfs);
 
         testGraph.launchAnalysis(0);
-        List<Integer> expectedRanks = Arrays.asList(3, 4, 0, 2, 1);
+        List<Integer> expectedRanks = Arrays.asList(1, 2, 0, 4, 3);
         List<Integer> actualRanks = new ArrayList<>();
         testGraph.getNodes().stream()
                 .sorted(Comparator.comparingDouble(AnalyzerNode::getRank).reversed())

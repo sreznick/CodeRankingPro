@@ -67,7 +67,9 @@ public class ClosenessGraph<T> implements Analyzer<T> {
 
     public void launchAnalysis(int iterations) {
         for (ClosenessNode node : nodes) {
-            node.setRank(bfs(node));
+            int bfsResult = bfs(node);
+            double cur_rank = (nodes.size() - 1) / (double)bfsResult;
+            node.setRank(Math.round(cur_rank * 1000.0) / 1000.0);
         }
     }
 
