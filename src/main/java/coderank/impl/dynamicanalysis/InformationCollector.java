@@ -54,7 +54,7 @@ public class InformationCollector {
     private static void modifyMethod(CtMethod method, int lineNumber, String from, String to, String invocationType) throws DynamicAnalysisException {
         try {
             String insertion = "{" +
-                    "coderank.impl.dynamic.BytecodeInsertion.toInsert(" +
+                    "coderank.impl.dynamicanalysis.BytecodeInsertion.toInsert(" +
                     "\"" + from + "\"" + "," +
                     "\"" + to + "\"" + "," +
                     "\"" + invocationType + "\"" +
