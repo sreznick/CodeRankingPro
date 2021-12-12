@@ -7,6 +7,6 @@ import java.util.List;
 
 public class KatzNode extends AnalyzerNode {
     public List<KatzNode> neighbours = new LinkedList<>();
-    public KatzNode(int index) { this.index = index; }
+    public KatzNode(int index) { setIndex(index); }
 
 }

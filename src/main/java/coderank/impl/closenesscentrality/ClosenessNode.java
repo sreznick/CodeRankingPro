@@ -7,8 +7,6 @@ import java.util.List;
 
 public class ClosenessNode extends AnalyzerNode {
     public List<ClosenessNode> neighbours = new LinkedList<>();
-    public ClosenessNode(int index) {
-        this.index = index;
-    }
+    public ClosenessNode(int index) { setIndex(index); }
 
 }

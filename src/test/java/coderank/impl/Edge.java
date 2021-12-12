@@ -1,8 +1,8 @@
 package coderank.impl;
 
-public  class Edge {
-    public int left;
-    public int right;
+public final class Edge {
+    private int left;
+    private int right;
 
     Edge(int left, int right) {
         this.left = left;

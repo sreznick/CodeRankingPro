@@ -54,7 +54,7 @@ public class TestPageRank {
         List<Integer> actual = new ArrayList<>();
         testGraph.nodes.stream()
                 .sorted(Comparator.comparingDouble(PageNode::getRank).reversed())
-                .forEach(x -> actual.add(x.index));
+                .forEach(x -> actual.add(x.getIndex()));
         assertEquals(expected, actual);
     }
 
@@ -168,7 +168,7 @@ public class TestPageRank {
         List<Integer> actual = new ArrayList<>();
         testGraph.nodes.stream()
                 .sorted(Comparator.comparingDouble(PageNode::getRank).reversed())
-                .forEach(x -> actual.add(x.index));
+                .forEach(x -> actual.add(x.getIndex()));
         assertEquals(expected, actual);
     }
 
@@ -212,7 +212,7 @@ public class TestPageRank {
         List<Integer> actual = new ArrayList<>();
         testGraph.nodes.stream()
                 .sorted(Comparator.comparingDouble(PageNode::getRank).reversed())
-                .forEach(x -> actual.add(x.index));
+                .forEach(x -> actual.add(x.getIndex()));
         assertEquals(expected, actual);
     }
 
@@ -256,7 +256,7 @@ public class TestPageRank {
         List<Integer> actual = new ArrayList<>();
         testGraph.nodes.stream()
                 .sorted(Comparator.comparingDouble(PageNode::getRank).reversed())
-                .forEach(x -> actual.add(x.index));
+                .forEach(x -> actual.add(x.getIndex()));
         assertTrue(expectedFirst.equals(actual) || expectedSecond.equals(actual));
     }
 
