@@ -24,14 +24,13 @@ public class Launcher {
         Enumeration<JarEntry> entries = jarFile.entries();
 
         // to launch without plugin installation
-         Configuration.setConfigProperty(args[5]);
 
-        new Configuration();
+        Configuration.initialize(args[5]);
 
         String mode = args[4];
         switch (mode) {
             case "static":
-                StaticLauncher.launchStatic(args, entries, jarFile);
+                StaticLauncher.launchStatic(args[1], args[2], jarFile);
                 break;
             case "instrument_dynamic":
                 DynamicLauncher.launchDynamic(args, entries);

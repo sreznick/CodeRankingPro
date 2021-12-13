@@ -18,7 +18,7 @@ class CodeRankPlugin : Plugin<Project> {
                 val classFilesLocation = extension.classFilesLocation.get()
                 val mode = extension.mode.get()
                 val args = arrayOf(inputJarFileName, graphBuilderLocation, graphBuilderName, classFilesLocation, mode)
-                Configuration.setConfigProperty(extension.propertiesFileName.get())
+               // Configuration.setConfigProperty(extension.propertiesFileName.get())
                 Launcher.main(args)
             }
         }.apply {

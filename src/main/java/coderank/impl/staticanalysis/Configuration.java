@@ -7,10 +7,9 @@ import java.util.Arrays;
 import java.util.Properties;
 
 public class Configuration {
-    private static String propertiesFileName;
     private static String[] packages = new String[0];
 
-    public Configuration() throws IOException {
+    public static void initialize(String propertiesFileName) throws IOException {
         InputStream input = new FileInputStream(propertiesFileName);
         Properties properties = new Properties();
         properties.load(input);
@@ -29,7 +28,4 @@ public class Configuration {
         return false;
     }
 
-    public static void setConfigProperty(String propertiesFileName) {
-        Configuration.propertiesFileName = propertiesFileName;
-    }
 }
