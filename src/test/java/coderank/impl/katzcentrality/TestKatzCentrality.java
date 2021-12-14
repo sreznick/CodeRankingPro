@@ -3,43 +3,23 @@ package coderank.impl.katzcentrality;
 import coderank.impl.analyzer.AnalyzerNode;
 import coderank.impl.javagraph.MethodNode;
 import coderank.impl.javagraph.Node;
-import coderank.impl.katzcentrality.KatzCentralityCalculator;
-import coderank.impl.katzcentrality.KatzCentralityLauncher;
-import coderank.impl.katzcentrality.KatzNode;
-import org.testng.annotations.Test;
-
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
-import java.nio.charset.StandardCharsets;
-import java.util.*;
-
+import coderank.impl.Edge;
 import static org.gradle.internal.impldep.org.junit.Assert.assertEquals;
 import static org.gradle.internal.impldep.org.junit.Assert.assertTrue;
 
+import java.io.OutputStreamWriter;
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import org.testng.annotations.Test;
+
+
 public class TestKatzCentrality {
     private KatzCentralityCalculator<KatzNode> testGraph;
-
-    private static class Edge {
-        public int left;
-        public int right;
-
-        Edge(int left, int right) {
-            this.left = left;
-            this.right = right;
-        }
-
-        public int getLeft() {
-            return left;
-        }
-
-        public int getRight() {
-            return right;
-        }
-
-        public static Edge create(int left, int right)  {
-            return new Edge(left, right);
-        }
-    };
 
     private void initializeGraph(int n, List<Edge> edges) {
         HashMap<Integer, KatzNode> storage =  new HashMap<>();

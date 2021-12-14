@@ -1,4 +1,4 @@
-package coderank.impl.pagerank;
+package coderank.impl.closenesscentrality;
 
 import coderank.impl.analyzer.AnalyzerLauncher;
 import coderank.impl.javagraph.Node;
@@ -8,14 +8,15 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
-public class PageRankLauncher<T> implements AnalyzerLauncher<T> {
+
+public class ClosenessCentralityLauncher<T> implements AnalyzerLauncher<T> {
 
     public void launch(HashSet<Node<T>> initStorage, HashMap<Node<T>, List<Node<T>>> edges,
                        HashMap<Node<T>, List<Node<T>>> parents, String mode,
                        OutputStreamWriter distinctStatsOutputStream) {
-        PageGraph<T> pageGraph = new PageGraph<>(initStorage, edges, parents);
-        pageGraph.launchAnalysis(30);
-        writeResult(pageGraph, mode, distinctStatsOutputStream);
+        ClosenessGraph<T> closenessGraph = new ClosenessGraph<>(initStorage, edges);
+        closenessGraph.launchAnalysis(0);
+        writeResult(closenessGraph, mode, distinctStatsOutputStream);
     }
 
 }
