@@ -12,10 +12,7 @@ import java.nio.charset.StandardCharsets;
 
 public class TestCppGraphBuilder {
     private void testGraphBuild(String pathToJson, String srcFileName) {
-        CppGraphBuilder cppGB = new CppGraphBuilder(
-                pathToJson,
-                srcFileName);
-        Graph<MethodNode> graph = cppGB.getCppGraph();
+        Graph<MethodNode> graph = CppGraphBuilder.loadCppGraph(pathToJson, srcFileName);
         //KatzCentralityLauncher<MethodNode> launcher = new KatzCentralityLauncher<>();
         PageRankLauncher<MethodNode> launcher = new PageRankLauncher<>();
         Exception e = new Exception();
@@ -41,6 +38,7 @@ public class TestCppGraphBuilder {
     public void testBigFile() {
         testGraphBuild("src/test/java/coderank/impl/cppgraphbuilder/testfiles/big.json",
                 "main_big.cpp");
+
     }
 
 }

@@ -18,6 +18,8 @@ public class KatzCentralityCalculator<T> implements Analyzer<T> {
     private HashSet<KatzNode> usedNodes = new HashSet<>();
     private final HashMap<KatzNode, Node<T>> revStorage = new HashMap<>();
     private final int nodesSize;
+    private final double alpha = 0.5;
+
 
 
     public KatzCentralityCalculator(HashSet<KatzNode> nodes) {
@@ -73,7 +75,6 @@ public class KatzCentralityCalculator<T> implements Analyzer<T> {
 
 
     public void launchAnalysis(int iterations) {
-        double alpha = 0.5;
         ArrayList<SimpleMatrix> As = new ArrayList<>();
         SimpleMatrix A_k = A;
         As.add(A_k);

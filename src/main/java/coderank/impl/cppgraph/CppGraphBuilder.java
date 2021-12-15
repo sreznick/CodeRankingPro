@@ -9,24 +9,36 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class CppGraphBuilder {
-    private final String _pathToGraph;
-    private final HashMap<String, HashSet<String>> _edges = new HashMap<>();
-    private final HashMap<String, MethodNode> _storage = new HashMap<>();
-    private final String _defaultFileName;
+    private static final HashMap<String, HashSet<String>> _edges = new HashMap<>();
+    private static final HashMap<String, MethodNode> _storage = new HashMap<>();
+    private static final String kind_tag = "kind";
+    private static final String id_tag = "id";
+    private static final String location_tag = "loc";
+    private static final String line_tag = "line";
+    private static final String col_tag = "col";
+    private static final String file_tag = "file";
+    private static final String name_tag = "name";
+    private static final String referenced_decl_tag = "referencedDecl";
+    private static final String function_decl_tag = "FunctionDecl";
+    private static final String cxx_method_decl_tag = "CXXMethodDecl";
+    private static final String member_expr_tag = "MemberExpr";
+    private static final String referenced_member_decl_tag = "referencedMemberDecl";
+    private static final String unknown = "?";
+    private static final Set<String> function_tags = new HashSet<>(Arrays.asList(function_decl_tag, cxx_method_decl_tag));
 
-    public CppGraphBuilder(String pathToGraph, String defaultFileName) {
-        _pathToGraph = pathToGraph;
-        _defaultFileName = defaultFileName;
-    }
 
-    public Graph<MethodNode> getCppGraph() {
+    private CppGraphBuilder() {}
+
+    public static Graph<MethodNode> loadCppGraph(String pathToGraph, String defaultFileName) {
+        _edges.clear();
+        _storage.clear();
         Graph<MethodNode> graph = new Graph<>();
         HashMap<String, Node<MethodNode>> storage = new HashMap<>();
         try {
             ObjectMapper mapper = new ObjectMapper();
 
-            Map<?, ?> map = mapper.readValue(Paths.get(_pathToGraph).toFile(), Map.class);
-            dfs(map, null, _defaultFileName);
+            Map<?, ?> map = mapper.readValue(Paths.get(pathToGraph).toFile(), Map.class);
+            dfs(map, null, defaultFileName);
             for (String id : _storage.keySet()) {
                 Node<MethodNode> node = MethodNode.createNode();
                 node.payload = _storage.get(id);
@@ -50,25 +62,24 @@ public class CppGraphBuilder {
         return graph;
     }
 
-    private void dfs(Map<?, ?> node, String parent, String fileName) {
+    private static void dfs(Map<?, ?> node, String parent, String fileName) {
         String new_parent;
         String new_filename;
-        if (Objects.equals(node.get("kind"), "FunctionDecl") ||
-                Objects.equals(node.get("kind"), "CXXMethodDecl")) {
-            new_parent = (String) node.get("id");
+        if (function_tags.contains((String) node.get(kind_tag))) {
+            new_parent = (String) node.get(id_tag);
 
             String line, col;
-            if (node.containsKey("loc")) {
-                Map<?, ?> loc = (Map<?, ?>) node.get("loc");
-                line = (loc.containsKey("line")) ? loc.get("line").toString() : "?";
-                col = (loc.containsKey("col")) ? loc.get("col").toString() : "?";
-                new_filename = (loc.containsKey("file")) ? (String) loc.get("file") : fileName;
+            if (node.containsKey(location_tag)) {
+                Map<?, ?> loc = (Map<?, ?>) node.get(location_tag);
+                line = (loc.containsKey(line_tag)) ? loc.get(line_tag).toString() : unknown;
+                col = (loc.containsKey(col_tag)) ? loc.get(col_tag).toString() : unknown;
+                new_filename = (loc.containsKey(file_tag)) ? (String) loc.get(file_tag) : fileName;
             } else {
-                line = "?";
-                col = "?";
-                new_filename = "?";
+                line = unknown;
+                col = unknown;
+                new_filename = unknown;
             }
-            _storage.put(new_parent, new MethodNode((String) node.get("name"), new_filename +
+            _storage.put(new_parent, new MethodNode((String) node.get(name_tag), new_filename +
                     ", line: " + line + ", col: " + col));
             _edges.put(new_parent, new HashSet<>());
         } else {
@@ -76,15 +87,15 @@ public class CppGraphBuilder {
             new_filename = fileName;
         }
 
-        if (parent != null && node.containsKey("referencedDecl")) {
-            Map<?, ?> referencedDecl = (Map<?, ?>) node.get("referencedDecl");
-            if (Objects.equals(referencedDecl.get("kind"), "FunctionDecl")) {
-                _edges.get(parent).add((String) referencedDecl.get("id"));
+        if (parent != null && node.containsKey(referenced_decl_tag)) {
+            Map<?, ?> referencedDecl = (Map<?, ?>) node.get(referenced_decl_tag);
+            if (Objects.equals(referencedDecl.get(kind_tag), function_decl_tag)) {
+                _edges.get(parent).add((String) referencedDecl.get(id_tag));
             }
         }
 
-        if (parent != null && Objects.equals(node.get("kind"), "MemberExpr")) {
-            _edges.get(parent).add((String) node.get("referencedMemberDecl"));
+        if (parent != null && Objects.equals(node.get(kind_tag), member_expr_tag)) {
+            _edges.get(parent).add((String) node.get(referenced_member_decl_tag));
         }
 
         for (Map.Entry<?, ?> entry : node.entrySet()) {
