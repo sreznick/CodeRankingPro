@@ -63,7 +63,7 @@ public class PageGraph<T> implements Analyzer<T> {
     private void updatePageRank(PageNode currentNode) {
         double sum = 0;
         for (PageNode node : currentNode.parents) {
-            sum += node.getRank() / node.neighbours.size();
+            sum += Math.round(node.getRank() / node.neighbours.size() * 1000.0) / 1000.0;
         }
         double randomFactor = dampingFactor / pageSetSize;
         currentNode.setRank(randomFactor + (1 - dampingFactor) * sum);
