@@ -22,6 +22,8 @@ public class MethodNode {
         return name;
     }
 
+    public String getDesc() {return desc; }
+
     private boolean isUsed() {
         return used;
     }

@@ -13,7 +13,7 @@ public class KatzCentralityLauncher<T> implements AnalyzerLauncher<T> {
     public void launch(HashSet<Node<T>> initStorage, HashMap<Node<T>, List<Node<T>>> edges,
                        HashMap<Node<T>, List<Node<T>>> parents, String mode, OutputStreamWriter distinctStatsOutputStream) {
         KatzCentralityCalculator<T> katz = new KatzCentralityCalculator<T>(initStorage, edges);
-        katz.launchAnalysis(50);
+        katz.launchAnalysis(5);
         writeResult(katz, mode, distinctStatsOutputStream);
     }
 }

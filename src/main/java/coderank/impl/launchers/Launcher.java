@@ -24,6 +24,7 @@ public class Launcher {
         Enumeration<JarEntry> entries = jarFile.entries();
 
         // to launch without plugin installation
+
         Configuration.initialize(args[5]);
 
         String mode = args[4];
