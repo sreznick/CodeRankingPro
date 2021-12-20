@@ -62,6 +62,9 @@ application {
     mainClass.set("coderank.impl.launchers.Launcher")
 }
 
+test {
+    useJUnitPlatform()
+}
 // Uncomment to apply plugin
 
 //apply plugin: 'org.coderank.CodeRanking'

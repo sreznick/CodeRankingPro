@@ -3,10 +3,9 @@ package coderank.impl.pagerank;
 import coderank.impl.analyzer.Analyzer;
 import coderank.impl.javagraph.Node;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 
 public class PageGraph<T> implements Analyzer<T> {
     private static int index = 0;
@@ -64,7 +63,7 @@ public class PageGraph<T> implements Analyzer<T> {
     private void updatePageRank(PageNode currentNode) {
         double sum = 0;
         for (PageNode node : currentNode.parents) {
-            sum += node.getRank() / node.neighbours.size();
+            sum += Math.round(node.getRank() / node.neighbours.size() * 1000.0) / 1000.0;
         }
         double randomFactor = dampingFactor / pageSetSize;
         currentNode.setRank(randomFactor + (1 - dampingFactor) * sum);
