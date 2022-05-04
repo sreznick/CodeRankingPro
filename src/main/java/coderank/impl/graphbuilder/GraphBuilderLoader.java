@@ -86,8 +86,8 @@ public class GraphBuilderLoader<T> {
     @SuppressWarnings("unchecked")
     public HashSet<Pair<Node<T>, Node<T>>> applyGetMethodRefs() throws GraphBuilderException {
         try {
-            Method getEdges = customGraphBuilder.getMethod("getGraphMethodRefs");
-            return (HashSet<Pair<Node<T>, Node<T>>>) getEdges.invoke(instance);
+            Method getMethodRefs = customGraphBuilder.getMethod("getGraphMethodRefs");
+            return (HashSet<Pair<Node<T>, Node<T>>>) getMethodRefs.invoke(instance);
         } catch (Exception e) {
             throw new GraphBuilderException("Unable to get graph method refs.");
         }

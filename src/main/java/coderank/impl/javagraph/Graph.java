@@ -37,6 +37,10 @@ public class Graph<T> implements GraphBuilder<T> {
 
     @Override
     public HashSet<Node<T>> constructGraph() {
+        for (Pair<Node<T>, Node<T>> entry : methodRefs) {
+            storage.add(entry.first);
+            storage.add(entry.second);
+        }
         for (Node<T> entry : storage) {
             edges.put(entry, new LinkedList<>());
             parents.put(entry, new LinkedList<>());

@@ -25,7 +25,6 @@ public class ReferencedMethodsVisitor extends MethodVisitor {
             child.payload = new MethodNode(actualName, desc);
             parent.getChildren().add(child);
             try {
-                StaticLauncher.loader.applyGetStorage().add(child);
                 StaticLauncher.loader.applyGetMethodRefs().add(new Pair<>(parent, child));
             } catch (GraphBuilderException e) {
                 e.printStackTrace();

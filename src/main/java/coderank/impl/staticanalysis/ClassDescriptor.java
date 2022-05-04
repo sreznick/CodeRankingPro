@@ -51,13 +51,7 @@ public class ClassDescriptor extends ClassVisitor {
         methodNames.add(actualName);
         Node<MethodNode> parent = MethodNode.createNode();
         parent.payload = new MethodNode(actualName, desc);
-        ReferencedMethodsVisitor ref = new ReferencedMethodsVisitor(parent);
-        try {
-            StaticLauncher.loader.applyGetStorage().add(parent);
-        } catch (GraphBuilderException e) {
-            e.printStackTrace();
-        }
-        return ref;
+        return new ReferencedMethodsVisitor(parent);
     }
 
 }
