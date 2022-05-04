@@ -84,20 +84,20 @@ public class GraphBuilderLoader<T> {
     }
 
     @SuppressWarnings("unchecked")
-    public HashSet<Pair<Node<T>, Node<T>>> applyGetEdges() throws GraphBuilderException {
+    public HashSet<Pair<Node<T>, Node<T>>> applyGetMethodRefs() throws GraphBuilderException {
         try {
-            Method getEdges = customGraphBuilder.getMethod("getGraphEdges");
+            Method getEdges = customGraphBuilder.getMethod("getGraphMethodRefs");
             return (HashSet<Pair<Node<T>, Node<T>>>) getEdges.invoke(instance);
         } catch (Exception e) {
-            throw new GraphBuilderException("Unable to get graph edges.");
+            throw new GraphBuilderException("Unable to get graph method refs.");
         }
     }
 
     @SuppressWarnings("unchecked")
-    public HashMap<Node<T>, List<Node<T>>> applyGetAdjacent() throws GraphBuilderException {
+    public HashMap<Node<T>, List<Node<T>>> applyGetEdges() throws GraphBuilderException {
         try {
-            Method getAdjacent = customGraphBuilder.getMethod("getGraphAdjacent");
-            return (HashMap<Node<T>, List<Node<T>>>) getAdjacent.invoke(instance);
+            Method getEdges = customGraphBuilder.getMethod("getGraphEdges");
+            return (HashMap<Node<T>, List<Node<T>>>) getEdges.invoke(instance);
         } catch (Exception e) {
             throw new GraphBuilderException("Unable to get graph edges.");
         }
@@ -109,7 +109,7 @@ public class GraphBuilderLoader<T> {
             Method getParents = customGraphBuilder.getMethod("getGraphParents");
             return (HashMap<Node<T>, List<Node<T>>>) getParents.invoke(instance);
         } catch (Exception e) {
-            throw new GraphBuilderException("Unable to get graph edges.");
+            throw new GraphBuilderException("Unable to get graph parents.");
         }
     }
 }

@@ -17,7 +17,7 @@ public class TestCppGraphBuilder {
         PageRankLauncher<MethodNode> launcher = new PageRankLauncher<>();
         Exception e = new Exception();
         try {
-            launcher.launch(graph.getGraphStorage(), graph.getGraphAdjacent(), graph.getGraphParents(), "dynamic",
+            launcher.launch(graph.getGraphStorage(), graph.getGraphEdges(), graph.getGraphParents(), "dynamic",
                     new OutputStreamWriter(new FileOutputStream("DynamicCodeRankingStat.txt"),
                             StandardCharsets.UTF_8));
         } catch (Exception ex) {

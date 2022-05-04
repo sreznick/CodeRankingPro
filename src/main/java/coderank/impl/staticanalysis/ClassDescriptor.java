@@ -15,6 +15,7 @@ import java.util.HashSet;
 public class ClassDescriptor extends ClassVisitor {
 
     public InputStream className;
+
     public String actualClassName;
 
     public String sourceName;

@@ -11,9 +11,9 @@ public interface GraphBuilder<T> {
 
     HashSet<Node<T>> getGraphStorage();
 
-    HashSet<Pair<Node<T>, Node<T>>> getGraphEdges();
+    HashSet<Pair<Node<T>, Node<T>>> getGraphMethodRefs();
 
-    HashMap<Node<T>, List<Node<T>>> getGraphAdjacent();
+    HashMap<Node<T>, List<Node<T>>> getGraphEdges();
 
     HashMap<Node<T>, List<Node<T>>> getGraphParents();
 
