@@ -15,6 +15,8 @@ public class Graph<T> implements GraphBuilder<T> {
 
     private final HashMap<Node<T>, List<Node<T>>> parents = new HashMap<>();
 
+    private final HashMap<Node<T>, Node<T>> methodSources = new HashMap<>();
+
     @Override
     public HashSet<Node<T>> getGraphStorage() {
         return storage;
@@ -33,6 +35,11 @@ public class Graph<T> implements GraphBuilder<T> {
     @Override
     public HashMap<Node<T>, List<Node<T>>> getGraphParents() {
         return parents;
+    }
+
+    @Override
+    public HashMap<Node<T>, Node<T>> getMethodSources() {
+        return methodSources;
     }
 
     @Override

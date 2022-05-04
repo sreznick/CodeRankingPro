@@ -112,4 +112,14 @@ public class GraphBuilderLoader<T> {
             throw new GraphBuilderException("Unable to get graph parents.");
         }
     }
+
+    @SuppressWarnings("unchecked")
+    public HashMap<Node<T>, Node<T>> applyGetMethodSources() throws GraphBuilderException {
+        try {
+            Method getMethodSources = customGraphBuilder.getMethod("getGraphMethodSources");
+            return (HashMap<Node<T>, Node<T>>) getMethodSources.invoke(instance);
+        } catch (Exception e) {
+            throw new GraphBuilderException("Unable to get graph method sources.");
+        }
+    }
 }

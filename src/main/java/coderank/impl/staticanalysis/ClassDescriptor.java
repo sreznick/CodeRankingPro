@@ -4,6 +4,7 @@ import coderank.impl.javagraph.MethodNode;
 import coderank.impl.javagraph.Node;
 import coderank.impl.graphbuilder.GraphBuilderException;
 import coderank.impl.launchers.StaticLauncher;
+import jdk.internal.net.http.common.Pair;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.MethodVisitor;
@@ -20,7 +21,7 @@ public class ClassDescriptor extends ClassVisitor {
 
     public String sourceName;
 
-    public HashSet<String> methodNames = new HashSet<>();
+    public Node<MethodNode> sourceNode;
 
     public ClassDescriptor(InputStream stream) {
         super(Opcodes.ASM7);
@@ -36,6 +37,8 @@ public class ClassDescriptor extends ClassVisitor {
     @Override
     public void visitSource(final String source, final String debug) {
         sourceName = source;
+        sourceNode = MethodNode.createNode();
+        sourceNode.payload = new MethodNode(sourceName, "");
     }
 
     @Override
@@ -48,10 +51,14 @@ public class ClassDescriptor extends ClassVisitor {
     public MethodVisitor visitMethod(int access, String name,
                                      String desc, String signature, String[] exceptions) {
         String actualName = (actualClassName + '.' + name).replace('/', '.');
-        methodNames.add(actualName);
-        Node<MethodNode> parent = MethodNode.createNode();
-        parent.payload = new MethodNode(actualName, desc);
-        return new ReferencedMethodsVisitor(parent);
+        Node<MethodNode> methodNode = MethodNode.createNode();
+        methodNode.payload = new MethodNode(actualName, desc);
+        try {
+            StaticLauncher.loader.applyGetMethodSources().put(methodNode, sourceNode);
+        } catch (GraphBuilderException e) {
+            e.printStackTrace();
+        }
+        return new ReferencedMethodsVisitor(methodNode);
     }
 
 }
