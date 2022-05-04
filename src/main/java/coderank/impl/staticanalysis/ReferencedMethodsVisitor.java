@@ -1,5 +1,8 @@
 package coderank.impl.staticanalysis;
 
+import coderank.impl.graphbuilder.GraphBuilderException;
+import coderank.impl.launchers.StaticLauncher;
+import jdk.internal.net.http.common.Pair;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
@@ -15,13 +18,18 @@ public class ReferencedMethodsVisitor extends MethodVisitor {
         super(Opcodes.ASM7);
         this.parent = parent;
     }
-
     void getReferenceInfo(String owner, String name, String desc) {
         if (Configuration.processPackage(owner)) {
             String actualName = (Type.getObjectType(owner).getClassName() + "." + name).replace('/', '.');
             Node<MethodNode> child = MethodNode.createNode();
             child.payload = new MethodNode(actualName, desc);
             parent.getChildren().add(child);
+            try {
+                StaticLauncher.loader.applyGetStorage().add(child);
+                StaticLauncher.loader.applyGetEdges().add(new Pair<>(parent, child));
+            } catch (GraphBuilderException e) {
+                e.printStackTrace();
+            }
         }
     }
 

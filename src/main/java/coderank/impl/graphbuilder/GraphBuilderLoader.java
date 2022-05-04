@@ -2,6 +2,7 @@ package coderank.impl.graphbuilder;
 
 import coderank.impl.javagraph.Node;
 import coderank.impl.pagerank.PageRankLauncher;
+import jdk.internal.net.http.common.Pair;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -79,6 +80,36 @@ public class GraphBuilderLoader<T> {
             return (HashSet<Node<T>>) getStorage.invoke(instance);
         } catch (Exception e) {
             throw new GraphBuilderException("Unable to get graph storage.");
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public HashSet<Pair<Node<T>, Node<T>>> applyGetEdges() throws GraphBuilderException {
+        try {
+            Method getEdges = customGraphBuilder.getMethod("getGraphEdges");
+            return (HashSet<Pair<Node<T>, Node<T>>>) getEdges.invoke(instance);
+        } catch (Exception e) {
+            throw new GraphBuilderException("Unable to get graph edges.");
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public HashMap<Node<T>, List<Node<T>>> applyGetAdjacent() throws GraphBuilderException {
+        try {
+            Method getAdjacent = customGraphBuilder.getMethod("getGraphAdjacent");
+            return (HashMap<Node<T>, List<Node<T>>>) getAdjacent.invoke(instance);
+        } catch (Exception e) {
+            throw new GraphBuilderException("Unable to get graph edges.");
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public HashMap<Node<T>, List<Node<T>>> applyGetParents() throws GraphBuilderException {
+        try {
+            Method getParents = customGraphBuilder.getMethod("getGraphParents");
+            return (HashMap<Node<T>, List<Node<T>>>) getParents.invoke(instance);
+        } catch (Exception e) {
+            throw new GraphBuilderException("Unable to get graph edges.");
         }
     }
 }

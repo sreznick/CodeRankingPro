@@ -10,11 +10,16 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
 import java.io.InputStream;
+import java.util.HashSet;
 
 public class ClassDescriptor extends ClassVisitor {
 
     public InputStream className;
     public String actualClassName;
+
+    public String sourceName;
+
+    public HashSet<String> methodNames = new HashSet<>();
 
     public ClassDescriptor(InputStream stream) {
         super(Opcodes.ASM7);
@@ -28,6 +33,11 @@ public class ClassDescriptor extends ClassVisitor {
     }
 
     @Override
+    public void visitSource(final String source, final String debug) {
+        sourceName = source;
+    }
+
+    @Override
     public FieldVisitor visitField(int access, String name, String desc,
                                    String signature, Object value) {
         return null;
@@ -37,6 +47,7 @@ public class ClassDescriptor extends ClassVisitor {
     public MethodVisitor visitMethod(int access, String name,
                                      String desc, String signature, String[] exceptions) {
         String actualName = (actualClassName + '.' + name).replace('/', '.');
+        methodNames.add(actualName);
         Node<MethodNode> parent = MethodNode.createNode();
         parent.payload = new MethodNode(actualName, desc);
         ReferencedMethodsVisitor ref = new ReferencedMethodsVisitor(parent);

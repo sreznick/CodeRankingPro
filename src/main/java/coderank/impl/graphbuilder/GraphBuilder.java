@@ -1,6 +1,7 @@
 package coderank.impl.graphbuilder;
 
 import coderank.impl.javagraph.Node;
+import jdk.internal.net.http.common.Pair;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -10,7 +11,9 @@ public interface GraphBuilder<T> {
 
     HashSet<Node<T>> getGraphStorage();
 
-    HashMap<Node<T>, List<Node<T>>> getGraphEdges();
+    HashSet<Pair<Node<T>, Node<T>>> getGraphEdges();
+
+    HashMap<Node<T>, List<Node<T>>> getGraphAdjacent();
 
     HashMap<Node<T>, List<Node<T>>> getGraphParents();
 
