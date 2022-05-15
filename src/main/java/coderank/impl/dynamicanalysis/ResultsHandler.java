@@ -26,7 +26,7 @@ public class ResultsHandler {
             storage = (HashMap<InvocationData, Integer>) objectInput.readObject();
             objectInput.close();
         } catch (IOException | ClassNotFoundException e) {
-            throw new DynamicAnalysisException("Unable to restore data.");
+            throw new DynamicAnalysisException("Unable to restore data.", e);
         }
     }
 

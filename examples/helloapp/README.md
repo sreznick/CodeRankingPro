@@ -5,7 +5,16 @@
 
 3. Unzip archive built as result of step 1
 
-4. For static check run something like:
+4. For static analysis run something like:
 
-bash CodeRanking-0.0.1/bin/CodeRanking  examples/helloapp/workspace/helloapp/lib/build/libs/app.jar build/libs/CodeRanking-0.0.1.jar coderank.impl.javagraph.Graph dummy  static examples/helloapp/ranking.properties 
+JAVA_OPTS="-Dconfig.file=config-samples/static.properties" ./CodeRanking-0.0.1/bin/CodeRanking
+
+5. For dynamic analysis first run:
+
+JAVA_OPTS="-Dconfig.file=config-samples/instrument.properties --add-opens java.base/java.lang=ALL-UNNAMED" ./CodeRanking-0.0.1/bin/CodeRanking
+
+then run instrumented application and
+
+JAVA_OPTS="-Dconfig.file=config-asmples/analyze.properties" ./CodeRanking-0.0.1/bin/CodeRanking 
+
 

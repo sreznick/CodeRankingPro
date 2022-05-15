@@ -7,5 +7,6 @@
 
 4. Run something like:
 
-bash CodeRanking-0.0.1/bin/CodeRanking  examples/hello/workspace/hello/lib/build/libs/lib.jar build/libs/CodeRanking-0.0.1.jar coderank.impl.javagraph.Graph dummy  static examples/hello/ranking.properties 
+JAVA_OPTS="-Dconfig.file=config-samples/static.properties" ./CodeRanking-0.0.1/bin/CodeRanking
+
 

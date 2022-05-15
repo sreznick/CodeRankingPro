@@ -16,6 +16,10 @@ public class BytecodeInsertion {
         } else {
             storage.put(invocationData, storage.get(invocationData) + 1);
         }
+
+        try { shutdown();}
+        catch (Exception e) {
+        };
     }
 
     public static void shutdown() throws DynamicAnalysisException {
