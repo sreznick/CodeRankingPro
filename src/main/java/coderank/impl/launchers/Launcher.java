@@ -6,6 +6,11 @@ import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import com.typesafe.config.ConfigFactory;
+import com.typesafe.config.Config;
+import java.util.Map;
+
+
 public class Launcher {
 
     /**
@@ -18,24 +23,29 @@ public class Launcher {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
+        Config conf = ConfigFactory.load();
+
+        String inputJarPath = conf.getString("path.input-jar");
+        String graphBuilderPath = conf.getString("path.graph-builder");
+        String graphBuilderClassName = conf.getString("graph-builder");
+        String rankingMode = conf.getString("ranking.mode");
+
         long time = System.currentTimeMillis();
-        String jarPath = args[0];
-        JarFile jarFile = new JarFile(jarPath);
+        JarFile jarFile = new JarFile(inputJarPath);
         Enumeration<JarEntry> entries = jarFile.entries();
 
         // to launch without plugin installation
 
-        Configuration.initialize(args[5]);
+        Configuration.initialize(conf.getString("ranking-properties"));
 
-        String mode = args[4];
-        switch (mode) {
+        switch (rankingMode) {
             case "static":
-                StaticLauncher.launchStatic(args[1], args[2], jarFile);
+                StaticLauncher.launchStatic(graphBuilderPath, graphBuilderClassName, jarFile);
                 break;
             case "instrument_dynamic":
-                DynamicLauncher.launchDynamic(args, entries);
+                DynamicLauncher.launchDynamic(conf, entries);
                 break;
-            case "analyse_dynamic":
+            case "analyze_dynamic":
                 DynamicLauncher.analyseDynamic(args, entries);
                 break;
             default:
