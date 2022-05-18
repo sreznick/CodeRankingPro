@@ -12,7 +12,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 
 public class TestClosenessCentrality {
     private ClosenessGraph<ClosenessNode> testGraph;

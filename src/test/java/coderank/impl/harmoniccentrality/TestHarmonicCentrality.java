@@ -15,7 +15,7 @@ import java.util.List;
 
 import coderank.impl.harmoniccentrality.HarmonicGraph;
 import coderank.impl.harmoniccentrality.HarmonicNode;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 
 public class TestHarmonicCentrality {
     private HarmonicGraph<HarmonicNode> testGraph;

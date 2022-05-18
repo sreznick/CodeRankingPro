@@ -4,7 +4,7 @@ import coderank.impl.cppgraph.CppGraphBuilder;
 import coderank.impl.javagraph.Graph;
 import coderank.impl.javagraph.MethodNode;
 import coderank.impl.pagerank.PageRankLauncher;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
