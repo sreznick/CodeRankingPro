@@ -1,4 +1,4 @@
-package coderank.impl.cppgraphbuilder;
+package coderank.impl.cpp.cppgraphbuilder;
 
 import coderank.impl.cppgraph.CppGraphBuilder;
 import coderank.impl.javagraph.Graph;
@@ -29,14 +29,14 @@ public class TestCppGraphBuilder {
 
     @Test
     public void testSmallFile() {
-        testGraphBuild("src/test/java/coderank/impl/cppgraphbuilder/testfiles/small.json",
+        testGraphBuild("src/test/java/coderank/impl/cpp/cppgraphbuilder/testfiles/small.json",
                 "main_small.cpp");
     }
 
     // There is the same file as in the previous test, but with #include <iostream> line
     @Test
     public void testBigFile() {
-        testGraphBuild("src/test/java/coderank/impl/cppgraphbuilder/testfiles/big.json",
+        testGraphBuild("src/test/java/coderank/impl/cpp/cppgraphbuilder/testfiles/big.json",
                 "main_big.cpp");
 
     }
