@@ -1,0 +1,81 @@
+{
+    "('message.cpp', 'message.h')": [
+        "('message.cpp', 'message.h')"
+    ],
+    "('network_utils.cpp', 'network_utils.h')": [
+        "('message.cpp', 'message.h')",
+        "('network_utils.cpp', 'network_utils.h')"
+    ],
+    "('server.cpp', None)": [
+        "('message.cpp', 'message.h')",
+        "('server_network_module.cpp', 'server_network_module.h')",
+        "('mixer.cpp', 'mixer.h')",
+        "('network_utils.cpp', 'network_utils.h')"
+    ],
+    "('mixer.cpp', 'mixer.h')": [
+        "('message.cpp', 'message.h')",
+        "('mixer.cpp', 'mixer.h')",
+        "(None, 'AudioFile.h')"
+    ],
+    "('server_network_module.cpp', 'server_network_module.h')": [
+        "('message.cpp', 'message.h')",
+        "('server_network_module.cpp', 'server_network_module.h')",
+        "('network_utils.cpp', 'network_utils.h')"
+    ],
+    "('model.cpp', 'model.h')": [
+        "('audio.cpp', 'audio.h')",
+        "('client.cpp', 'client.h')",
+        "('move_item.cpp', 'move_item.h')",
+        "('user.cpp', 'user.h')",
+        "('login_widget.cpp', 'login_widget.h')",
+        "('model.cpp', 'model.h')",
+        "('message.cpp', 'message.h')",
+        "(None, 'model_fwd.h')",
+        "('view.cpp', 'view.h')"
+    ],
+    "('audio_button.cpp', 'audio_button.h')": [
+        "('audio_button.cpp', 'audio_button.h')"
+    ],
+    "('mock.cpp', 'mock.h')": [
+        "('mock.cpp', 'mock.h')",
+        "('model.cpp', 'model.h')",
+        "(None, 'model_fwd.h')",
+        "('message.cpp', 'message.h')"
+    ],
+    "('client.cpp', 'client.h')": [
+        "('client.cpp', 'client.h')",
+        "('model.cpp', 'model.h')",
+        "('message.cpp', 'message.h')",
+        "(None, 'model_fwd.h')",
+        "('network_utils.cpp', 'network_utils.h')"
+    ],
+    "('login_widget.cpp', 'login_widget.h')": [
+        "('model.cpp', 'model.h')",
+        "(None, 'model_fwd.h')",
+        "('login_widget.cpp', 'login_widget.h')"
+    ],
+    "('view.cpp', 'view.h')": [
+        "('move_item.cpp', 'move_item.h')",
+        "(None, 'model_fwd.h')",
+        "('view.cpp', 'view.h')",
+        "('audio_button.cpp', 'audio_button.h')"
+    ],
+    "('main.cpp', None)": [
+        "('model.cpp', 'model.h')"
+    ],
+    "('move_item.cpp', 'move_item.h')": [
+        "('move_item.cpp', 'move_item.h')",
+        "('user.cpp', 'user.h')",
+        "(None, 'model_fwd.h')",
+        "('model.cpp', 'model.h')"
+    ],
+    "('audio.cpp', 'audio.h')": [
+        "('audio.cpp', 'audio.h')",
+        "('model.cpp', 'model.h')",
+        "(None, 'model_fwd.h')",
+        "('message.cpp', 'message.h')"
+    ],
+    "('user.cpp', 'user.h')": [
+        "('user.cpp', 'user.h')"
+    ]
+}
