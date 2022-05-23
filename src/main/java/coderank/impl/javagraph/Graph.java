@@ -15,7 +15,7 @@ public class Graph<T> implements GraphBuilder<T> {
 
     private final HashMap<Node<T>, List<Node<T>>> parents = new HashMap<>();
 
-    private final HashMap<Node<T>, Node<T>> methodSources = new HashMap<>();
+    private final HashMap<Node<T>, String> methodSources = new HashMap<>();
 
     @Override
     public HashSet<Node<T>> getGraphStorage() {
@@ -38,7 +38,7 @@ public class Graph<T> implements GraphBuilder<T> {
     }
 
     @Override
-    public HashMap<Node<T>, Node<T>> getMethodSources() {
+    public HashMap<Node<T>, String> getMethodSources() {
         return methodSources;
     }
 
@@ -49,6 +49,10 @@ public class Graph<T> implements GraphBuilder<T> {
             storage.add(entry.second);
         }
         for (Node<T> entry : storage) {
+            String name = entry.getName();
+            int idx = name.lastIndexOf('.');
+            String className = (String) name.subSequence(0, idx);
+            entry.setDesc(className);
             edges.put(entry, new LinkedList<>());
             parents.put(entry, new LinkedList<>());
         }

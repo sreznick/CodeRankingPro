@@ -21,8 +21,6 @@ public class ClassDescriptor extends ClassVisitor {
 
     public String sourceName;
 
-    public Node<MethodNode> sourceNode;
-
     public ClassDescriptor(InputStream stream) {
         super(Opcodes.ASM7);
         className = stream;
@@ -37,8 +35,6 @@ public class ClassDescriptor extends ClassVisitor {
     @Override
     public void visitSource(final String source, final String debug) {
         sourceName = source;
-        sourceNode = MethodNode.createNode();
-        sourceNode.payload = new MethodNode(sourceName, "");
     }
 
     @Override
@@ -54,7 +50,7 @@ public class ClassDescriptor extends ClassVisitor {
         Node<MethodNode> methodNode = MethodNode.createNode();
         methodNode.payload = new MethodNode(actualName, desc);
         try {
-            StaticLauncher.loader.applyGetMethodSources().put(methodNode, sourceNode);
+            StaticLauncher.loader.applyGetMethodSources().put(methodNode, sourceName);
         } catch (GraphBuilderException e) {
             e.printStackTrace();
         }

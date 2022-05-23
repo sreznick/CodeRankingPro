@@ -17,7 +17,7 @@ public interface GraphBuilder<T> {
 
     HashMap<Node<T>, List<Node<T>>> getGraphParents();
 
-    HashMap<Node<T>, Node<T>> getMethodSources();
+    HashMap<Node<T>, String> getMethodSources();
 
     HashSet<Node<T>> constructGraph();
 }

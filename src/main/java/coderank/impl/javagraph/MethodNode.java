@@ -7,7 +7,7 @@ import java.util.Objects;
 public class MethodNode {
 
     private final String name;
-    private final String desc;
+    private String desc;
     private boolean used;
     private final List<Node<MethodNode>> children;
 
@@ -22,7 +22,9 @@ public class MethodNode {
         return name;
     }
 
-    public String getDesc() {return desc; }
+    public String getDesc() {
+        return desc;
+    }
 
     private boolean isUsed() {
         return used;
@@ -62,6 +64,16 @@ public class MethodNode {
             @Override
             public String getName() {
                 return payload.name;
+            }
+
+            @Override
+            public String getDesc() {
+                return payload.getDesc();
+            }
+
+            @Override
+            public void setDesc(String desc) {
+                payload.desc = desc;
             }
 
             @Override

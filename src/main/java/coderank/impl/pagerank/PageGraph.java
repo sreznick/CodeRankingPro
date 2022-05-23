@@ -23,7 +23,7 @@ public class PageGraph<T> implements Analyzer<T> {
                      HashMap<Node<T>, List<Node<T>>> parents) {
         HashMap<Node<T>, PageNode> storage = new HashMap<>();
         for (Node<T> node : initStorage) {
-            PageNode currentNode = new PageNode(index++);
+            PageNode currentNode = new PageNode(index++, node.getDesc());
             storage.put(node, currentNode);
             revStorage.put(currentNode, node);
             nodes.add(currentNode);

@@ -48,11 +48,7 @@ public interface Analyzer<T> {
     default void rankClasses() {
         Map<Object, ? extends List<? extends AnalyzerNode>> classNameMap =
                 getNodes().stream()
-                        .collect(Collectors.groupingBy(x -> {
-                            String name = getRevStorage().get(x).getName();
-                            int idx = name.lastIndexOf('.');
-                            return name.subSequence(0, idx);
-                        }));
+                        .collect(Collectors.groupingBy(x -> getRevStorage().get(x).getDesc()));
 
         Map<String, Double> classRanks = new HashMap<>();
         for (Object name : classNameMap.keySet()) {

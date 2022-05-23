@@ -16,6 +16,10 @@ public abstract class Node<T> {
 
     public abstract String getName();
 
+    public abstract String getDesc();
+
+    public abstract void setDesc(String desc);
+
     @Override
     public abstract boolean equals(Object o);
 

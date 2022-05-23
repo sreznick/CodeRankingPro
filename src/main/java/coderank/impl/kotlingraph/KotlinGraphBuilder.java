@@ -19,7 +19,7 @@ public class KotlinGraphBuilder<T> implements GraphBuilder<T> {
 
     private final HashMap<Node<T>, List<Node<T>>> parents = new HashMap<>();
 
-    private final HashMap<Node<T>, Node<T>> methodSources = new HashMap<>();
+    private final HashMap<Node<T>, String> methodSources = new HashMap<>();
 
     @Override
     public HashSet<Node<T>> getGraphStorage() {
@@ -42,26 +42,48 @@ public class KotlinGraphBuilder<T> implements GraphBuilder<T> {
     }
 
     @Override
-    public HashMap<Node<T>, Node<T>> getMethodSources() {
+    public HashMap<Node<T>, String> getMethodSources() {
         return methodSources;
     }
 
     @Override
     public HashSet<Node<T>> constructGraph() {
-        storage.addAll(methodSources.values());
+        for (Pair<Node<T>, Node<T>> entry : methodRefs) {
+            storage.add(entry.first);
+            storage.add(entry.second);
+        }
         for (Node<T> entry : storage) {
+            if (methodSources.containsKey(entry)) entry.setDesc(methodSources.get(entry));
             edges.put(entry, new LinkedList<>());
             parents.put(entry, new LinkedList<>());
         }
-        for (Pair<Node<T>, Node<T>> methodRef : methodRefs) {
-            Node<T> parentMethodNode = methodRef.first;
-            Node<T> childMethodNode = methodRef.second;
-            if (methodSources.containsKey(parentMethodNode) && methodSources.containsKey(childMethodNode)) {
-                addEdge(methodSources.get(parentMethodNode), methodSources.get(childMethodNode));
-                addParent(methodSources.get(parentMethodNode), methodSources.get(childMethodNode));
+        for (Node<T> entry : storage) {
+            if (!entry.isUsed()) {
+                traverseChildren(entry, null);
             }
         }
         return storage;
+    }
+
+    private void traverseChildren(Node<T> current, Node<T> parent) {
+        for (Node<T> elem : storage) {
+            if (current.nodeEquals(elem)) {
+                current = elem;
+                if (parent != null && !current.nodeEquals(parent)) {
+                    addEdge(parent, current);
+                    addParent(parent, current);
+                }
+                break;
+            }
+        }
+        if (current.isUsed()) {
+            return;
+        }
+        current.setUsed();
+
+        for (int i = 0; i < current.getChildren().size(); i++) {
+            traverseChildren(current.getChildren().get(i), current);
+        }
     }
 
     private void addEdge(Node<T> parent, Node<T> child) {

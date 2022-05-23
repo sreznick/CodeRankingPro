@@ -114,10 +114,10 @@ public class GraphBuilderLoader<T> {
     }
 
     @SuppressWarnings("unchecked")
-    public HashMap<Node<T>, Node<T>> applyGetMethodSources() throws GraphBuilderException {
+    public HashMap<Node<T>, String> applyGetMethodSources() throws GraphBuilderException {
         try {
             Method getMethodSources = customGraphBuilder.getMethod("getGraphMethodSources");
-            return (HashMap<Node<T>, Node<T>>) getMethodSources.invoke(instance);
+            return (HashMap<Node<T>, String>) getMethodSources.invoke(instance);
         } catch (Exception e) {
             throw new GraphBuilderException("Unable to get graph method sources.");
         }
