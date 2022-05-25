@@ -1,0 +1,19 @@
+EXE = main
+CXX = g++
+CXX_FLAGS = -std=c++17 -Wall -Iinclude
+OBJECTS = obj/main.o obj/utils.o
+
+$(EXE): $(OBJECTS)
+	$(CXX) -o $@ $(OBJECTS)
+
+$(OBJECTS): obj/%.o: src/%.cpp | obj
+	$(CXX) $(CXX_FLAGS) -c $< -o $@
+
+obj:
+	mkdir -p obj
+
+clean :
+	$(RM) $(EXE)
+	$(RM) -rf obj
+
+.PHONY: all clean
