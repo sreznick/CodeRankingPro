@@ -1,0 +1,384 @@
+[
+	{
+		"id": 1,
+		"name": "huffman::Archiver::Archiver()",
+		"links": [
+			{
+				"id": 2,
+				"count": 1
+			}
+		]
+	},
+	{
+		"id": 2,
+		"name": "main",
+		"links": []
+	},
+	{
+		"id": 3,
+		"name": "huffman::BBWriter::BBWriter()",
+		"links": [
+			{
+				"id": 1,
+				"count": 1
+			}
+		]
+	},
+	{
+		"id": 4,
+		"name": "huffman::BBReader::BBReader()",
+		"links": [
+			{
+				"id": 1,
+				"count": 1
+			}
+		]
+	},
+	{
+		"id": 5,
+		"name": "huffman::parse_args(int, char**, huffman::Mode&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >&)",
+		"links": [
+			{
+				"id": 2,
+				"count": 1
+			}
+		]
+	},
+	{
+		"id": 6,
+		"name": "huffman::Archiver::load_files(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)",
+		"links": [
+			{
+				"id": 2,
+				"count": 1
+			}
+		]
+	},
+	{
+		"id": 7,
+		"name": "huffman::BBReader::BBReader(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)",
+		"links": [
+			{
+				"id": 6,
+				"count": 1
+			}
+		]
+	},
+	{
+		"id": 8,
+		"name": "huffman::BBReader::operator=(huffman::BBReader&&)",
+		"links": [
+			{
+				"id": 6,
+				"count": 1
+			}
+		]
+	},
+	{
+		"id": 9,
+		"name": "huffman::BBReader::~BBReader()",
+		"links": [
+			{
+				"id": 6,
+				"count": 1
+			},
+			{
+				"id": 35,
+				"count": 1
+			}
+		]
+	},
+	{
+		"id": 10,
+		"name": "huffman::BBWriter::BBWriter(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)",
+		"links": [
+			{
+				"id": 6,
+				"count": 1
+			}
+		]
+	},
+	{
+		"id": 11,
+		"name": "huffman::BBWriter::operator=(huffman::BBWriter&&)",
+		"links": [
+			{
+				"id": 6,
+				"count": 1
+			}
+		]
+	},
+	{
+		"id": 12,
+		"name": "huffman::BBWriter::~BBWriter()",
+		"links": [
+			{
+				"id": 6,
+				"count": 1
+			},
+			{
+				"id": 35,
+				"count": 1
+			}
+		]
+	},
+	{
+		"id": 13,
+		"name": "huffman::Archiver::create()",
+		"links": [
+			{
+				"id": 2,
+				"count": 1
+			}
+		]
+	},
+	{
+		"id": 14,
+		"name": "huffman::Archiver::count_amounts()",
+		"links": [
+			{
+				"id": 13,
+				"count": 1
+			}
+		]
+	},
+	{
+		"id": 15,
+		"name": "huffman::BBReader::good() const",
+		"links": [
+			{
+				"id": 14,
+				"count": 13
+			},
+			{
+				"id": 13,
+				"count": 13
+			}
+		]
+	},
+	{
+		"id": 16,
+		"name": "huffman::operator>>(huffman::BBReader&, unsigned char&)",
+		"links": [
+			{
+				"id": 14,
+				"count": 13
+			},
+			{
+				"id": 13,
+				"count": 13
+			}
+		]
+	},
+	{
+		"id": 17,
+		"name": "huffman::BBReader::eof() const",
+		"links": [
+			{
+				"id": 14,
+				"count": 13
+			},
+			{
+				"id": 13,
+				"count": 13
+			}
+		]
+	},
+	{
+		"id": 18,
+		"name": "huffman::Archiver::build_codes_from_amounts()",
+		"links": [
+			{
+				"id": 13,
+				"count": 1
+			}
+		]
+	},
+	{
+		"id": 19,
+		"name": "huffman::Node::Node(unsigned char, unsigned long)",
+		"links": [
+			{
+				"id": 18,
+				"count": 256
+			}
+		]
+	},
+	{
+		"id": 20,
+		"name": "huffman::Archiver::build_codes_from_amounts()::{lambda(huffman::Node*, huffman::Node*)#1}::operator()(huffman::Node*, huffman::Node*) const",
+		"links": [
+			{
+				"id": 21,
+				"count": 1389
+			},
+			{
+				"id": 23,
+				"count": 2608
+			}
+		]
+	},
+	{
+		"id": 21,
+		"name": "bool __gnu_cxx::__ops::_Iter_comp_val<huffman::Archiver::build_codes_from_amounts()::{lambda(huffman::Node*, huffman::Node*)#1}>::operator()<__gnu_cxx::__normal_iterator<huffman::Node**, std::vector<huffman::Node*, std::allocator<huffman::Node*> > >, huffman::Node*>(__gnu_cxx::__normal_iterator<huffman::Node**, std::vector<huffman::Node*, std::allocator<huffman::Node*> > >, huffman::Node*&)",
+		"links": []
+	},
+	{
+		"id": 22,
+		"name": "huffman::Node::get_amount() const",
+		"links": [
+			{
+				"id": 20,
+				"count": 7994
+			}
+		]
+	},
+	{
+		"id": 23,
+		"name": "bool __gnu_cxx::__ops::_Iter_comp_iter<huffman::Archiver::build_codes_from_amounts()::{lambda(huffman::Node*, huffman::Node*)#1}>::operator()<__gnu_cxx::__normal_iterator<huffman::Node**, std::vector<huffman::Node*, std::allocator<huffman::Node*> > >, std::vector<huffman::Node*, std::allocator<huffman::Node*> > >(__gnu_cxx::__normal_iterator<huffman::Node**, std::vector<huffman::Node*, std::allocator<huffman::Node*> > >, std::vector<huffman::Node*, std::allocator<huffman::Node*> >)",
+		"links": []
+	},
+	{
+		"id": 24,
+		"name": "huffman::Node::Node(huffman::Node*, huffman::Node*)",
+		"links": [
+			{
+				"id": 18,
+				"count": 255
+			}
+		]
+	},
+	{
+		"id": 25,
+		"name": "huffman::Archiver::build_codes_from_node(huffman::Node*, std::vector<bool, std::allocator<bool> >)",
+		"links": [
+			{
+				"id": 18,
+				"count": 1
+			},
+			{
+				"id": 25,
+				"count": 510
+			}
+		]
+	},
+	{
+		"id": 26,
+		"name": "huffman::Node::is_final() const",
+		"links": [
+			{
+				"id": 25,
+				"count": 511
+			}
+		]
+	},
+	{
+		"id": 27,
+		"name": "huffman::Node::get_step0() const",
+		"links": [
+			{
+				"id": 25,
+				"count": 766
+			}
+		]
+	},
+	{
+		"id": 28,
+		"name": "huffman::Node::get_byte() const",
+		"links": [
+			{
+				"id": 25,
+				"count": 256
+			}
+		]
+	},
+	{
+		"id": 29,
+		"name": "huffman::Node::get_step1() const",
+		"links": [
+			{
+				"id": 25,
+				"count": 766
+			}
+		]
+	},
+	{
+		"id": 30,
+		"name": "huffman::BBReader::rewind()",
+		"links": [
+			{
+				"id": 13,
+				"count": 1
+			}
+		]
+	},
+	{
+		"id": 31,
+		"name": "huffman::operator<<(huffman::BBWriter&, unsigned long)",
+		"links": [
+			{
+				"id": 13,
+				"count": 256
+			}
+		]
+	},
+	{
+		"id": 32,
+		"name": "huffman::BBWriter::stream()",
+		"links": [
+			{
+				"id": 31,
+				"count": 256
+			}
+		]
+	},
+	{
+		"id": 33,
+		"name": "huffman::operator<<(huffman::BBWriter&, bool)",
+		"links": [
+			{
+				"id": 13,
+				"count": 41
+			}
+		]
+	},
+	{
+		"id": 34,
+		"name": "huffman::BBWriter::drop_bits()",
+		"links": [
+			{
+				"id": 13,
+				"count": 1
+			}
+		]
+	},
+	{
+		"id": 35,
+		"name": "huffman::Archiver::~Archiver()",
+		"links": [
+			{
+				"id": 2,
+				"count": 1
+			}
+		]
+	},
+	{
+		"id": 36,
+		"name": "huffman::Node::~Node()",
+		"links": [
+			{
+				"id": 37,
+				"count": 1
+			},
+			{
+				"id": 36,
+				"count": 510
+			}
+		]
+	},
+	{
+		"id": 37,
+		"name": "std::_Sp_counted_ptr<huffman::Node*, (__gnu_cxx::_Lock_policy)2>::_M_dispose()",
+		"links": []
+	}
+]

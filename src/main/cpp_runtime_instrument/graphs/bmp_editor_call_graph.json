@@ -1,0 +1,123 @@
+[
+	{
+		"id": 1,
+		"name": "handle_crop_rotate",
+		"links": [
+			{
+				"id": 2,
+				"count": 1
+			}
+		]
+	},
+	{
+		"id": 2,
+		"name": "main",
+		"links": []
+	},
+	{
+		"id": 3,
+		"name": "safe_fopen",
+		"links": [
+			{
+				"id": 1,
+				"count": 2
+			}
+		]
+	},
+	{
+		"id": 4,
+		"name": "load_bmp_image",
+		"links": [
+			{
+				"id": 1,
+				"count": 1
+			}
+		]
+	},
+	{
+		"id": 5,
+		"name": "init_bmp_image_data",
+		"links": [
+			{
+				"id": 4,
+				"count": 1
+			},
+			{
+				"id": 8,
+				"count": 1
+			},
+			{
+				"id": 9,
+				"count": 1
+			}
+		]
+	},
+	{
+		"id": 6,
+		"name": "count_row_size",
+		"links": [
+			{
+				"id": 5,
+				"count": 3
+			},
+			{
+				"id": 8,
+				"count": 1
+			},
+			{
+				"id": 9,
+				"count": 1
+			}
+		]
+	},
+	{
+		"id": 7,
+		"name": "check_size",
+		"links": [
+			{
+				"id": 1,
+				"count": 1
+			}
+		]
+	},
+	{
+		"id": 8,
+		"name": "crop",
+		"links": [
+			{
+				"id": 1,
+				"count": 1
+			}
+		]
+	},
+	{
+		"id": 9,
+		"name": "rotate",
+		"links": [
+			{
+				"id": 1,
+				"count": 1
+			}
+		]
+	},
+	{
+		"id": 10,
+		"name": "save_bmp_image",
+		"links": [
+			{
+				"id": 1,
+				"count": 1
+			}
+		]
+	},
+	{
+		"id": 11,
+		"name": "destroy_bmp_image",
+		"links": [
+			{
+				"id": 1,
+				"count": 3
+			}
+		]
+	}
+]
